@@ -1,4 +1,4 @@
-const CACHE_NAME = "alanon-sa-v1";
+const CACHE_NAME = "alanon-sa-v3";
 const ASSETS = [
   "./",
   "./index.html",
