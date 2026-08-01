@@ -1,0 +1,14 @@
+{
+  "name": "San Antonio Al-Anon Meeting Finder",
+  "short_name": "Al-Anon SA",
+  "description": "Find Al-Anon meetings in the San Antonio area, District 12.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F5F1E6",
+  "theme_color": "#00335F",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
