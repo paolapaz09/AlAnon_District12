@@ -606,6 +606,7 @@ const ZIP = {
   '78201':[29.469,-98.531], '78238':[29.480,-98.597], '78209':[29.479,-98.462],
   '78216':[29.523,-98.498], '78249':[29.568,-98.617], '78213':[29.503,-98.516],
   '78232':[29.564,-98.491], '78240':[29.510,-98.579], '78254':[29.523,-98.706],
+  '78250':[29.489,-98.741], '78205':[29.425,-98.489],
   '78260':[29.716,-98.467], '78006':[29.826,-98.775], '78133':[29.874,-98.264],
   '78009':[29.353,-98.880], '78121':[29.348,-98.113], '78130':[29.703,-98.124],
   '78154':[29.552,-98.263], '78155':[29.568,-97.960], '78070':[29.869,-98.397],
@@ -614,65 +615,61 @@ const ZIP = {
 function ll(zip){ return ZIP[zip] || [29.4241,-98.4936]; }
 
 const RAW = [
-["San Antonio","Abramos El Corazon GFA","722 Balcones Heights Rd","","78201","Mon","8:00 PM",["O","S"]],
-["San Antonio","Abramos El Corazon GFA","722 Balcones Heights Rd","","78201","Wed","8:00 PM",["O","S"]],
-["San Antonio","Abramos El Corazon GFA","722 Balcones Heights Rd","","78201","Fri","8:00 PM",["O","S"]],
-["San Antonio","Booster Shot AFG","St Andrews Episcopal Church, 6110 NW Loop 410","Annex Building","78238","Tue","12:00 PM",["O"]],
-["San Antonio","Cathedral Park AFG","Bishop Jones Center, 111 Torcido Dr","Chapel House","78209","Thu","12:00 PM",["O","WC"]],
-["San Antonio","Club 12 – Recovering AFG (Adult Children of Alcoholics)","102 Thames Dr","","78216","Sun","2:00 PM",["O","WC"]],
-["San Antonio","Club 12 – Serenity Now","102 Thames Dr","","78216","Mon","11:00 AM",["O","WC","D","*"]],
-["San Antonio","Club 12 – Monday Stag Men's AFG","102 Thames Dr","","78216","Mon","6:30 PM",["O","M"]],
-["San Antonio","Club 12 – Solo Por Hoy GFA","102 Thames Dr","","78216","Mon","8:00 PM",["O","S","WC"]],
-["San Antonio","Club 12 – How It Works AFG","102 Thames Dr","","78216","Tue","11:00 AM",["O","WC"]],
-["San Antonio","Club 12 – Stepping Into Recovery AFG","102 Thames Dr","","78216","Tue","11:00 AM",["O","SS","*"]],
-["San Antonio","Club 12 – Newcomers Tuesday 5:30 AFG","102 Thames Dr","","78216","Tue","5:30 PM",["O","N","*"]],
-["San Antonio","Club 12 – Inspiration AFG","102 Thames Dr","","78216","Tue","8:15 PM",["O","D","*"]],
-["San Antonio","Club 12 – Wed. & Thurs. 11AM AFG","102 Thames Dr","","78216","Wed","11:00 AM",["O","BS","*"]],
-["San Antonio","Club 12 – Circle Of Hope AFG","102 Thames Dr","","78216","Wed","5:30 PM",["O","BS","*"]],
-["San Antonio","Club 12 – Wed. & Thurs. 11AM AFG","102 Thames Dr","","78216","Thu","11:00 AM",["O","BS","*"]],
-["San Antonio","Club 12 – Friday 11 AM AFG","102 Thames Dr","","78216","Fri","11:00 AM",["O","D","*"]],
-["San Antonio","Club 12 – Solo Por Hoy GFA","102 Thames Dr","","78216","Fri","7:00 PM",["O","S","WC"]],
-["San Antonio","Club 12 – Saturday 10AM Beginners AFG","102 Thames Dr","","78216","Sat","10:00 AM",["O","N"]],
-["San Antonio","Club 12 – Saturday 11 AM AFG","102 Thames Dr","","78216","Sat","11:00 AM",["O","WC","D","*"]],
-["San Antonio","Expect a Miracle AFG","Coker United Methodist Church, 231 East North Loop Rd","Portable building in the back","78216","Mon","7:00 PM",["C","B"]],
-["San Antonio","Gold Canyon AFG","St Mark the Evangelist Catholic Church, 1602 Thousand Oaks","Christopher Hall, Room 202 · elevator access","78238","Mon","12:00 PM",["C","WC","FF"]],
-["San Antonio","Gold Canyon AFG","St Mark the Evangelist Catholic Church, 1602 Thousand Oaks","Christopher Hall, Room 202 · elevator access","78238","Wed","12:00 PM",["C","WC","FF"]],
-["San Antonio","Happy Destiny AFG","St George Episcopal Church, 6904 West Ave","Leadership Center, 2nd Floor","78213","Mon","7:00 PM",["O","B"]],
-["San Antonio","Happy Destiny AFG","St George Episcopal Church, 6904 West Ave","Leadership Center, 2nd Floor","78213","Tue","7:00 PM",["O","B"]],
-["San Antonio","Happy Destiny AFG","St George Episcopal Church, 6904 West Ave","Leadership Center, 2nd Floor","78213","Thu","7:00 PM",["O","B"]],
-["San Antonio","Happy Hour AFG","St. Thomas Episcopal Church, 1416 N Loop 1604 E","Portable Bldg. #5","78232","Wed","5:45 PM",["C"]],
-["San Antonio","Hope for Today AFG","St. Francis Episcopal Church, 4242 Bluemel Rd","Portable Bldg.","78240","Wed","5:30 PM",["O","WC","FF"]],
-["San Antonio","Hula Hoop Women's AFG","Coker United Methodist Church, 231 E North Loop Rd","Health & Wellness Ctr, Lower Parking Lot","78216","Mon","6:30 PM",["O","WC"]],
-["San Antonio","Monday Big Book AFG","University Methodist Church, 5084 De Zavala Rd","Room 214","78249","Mon","7:00 PM",["C","B","D"]],
-["San Antonio","North Loop Road AFG","Coker United Methodist Church, 231 E North Loop Rd","Health & Wellness Ctr, Lower Parking Lot","78216","Thu","7:00 PM",["O","WC","B","AT"]],
-["San Antonio","Northwest San Antonio AFG","Zion Lutheran Church, 9944 Leslie Rd","Fellowship Hall next to Sanctuary","78254","Wed","7:00 PM",["O","WC","D"]],
-["San Antonio","Northwoods AFG","Northwoods Presbyterian Church, 518 Pike Rd","","78209","Tue","7:30 PM",["O","WC"]],
-["San Antonio","Parents AFG","St. Davids Episcopal Church, 1300 Wiltshire Ave","In the Attic","78209","Wed","7:00 PM",["O"]],
-["San Antonio","Saturday Big Book AFG","University United Methodist Church, 5084 De Zavala Rd","Room 214C","78249","Sat","11:00 AM",["O","B","D","AT"]],
-["San Antonio","Stepping Through Life AFG","St Thomas Episcopal Church, 1416 N Loop 1604 E","Portable Bldg. #5","78232","Sat","9:15 AM",["O","WC","D"]],
-["San Antonio","Sunset AFG","Bulverde United Methodist, 28300 US Hwy 281 N","","78260","Tue","7:00 PM",["C","D"]],
-["San Antonio","Using the Traditions in Relationships AFG","St George Episcopal Church, 6904 West Ave","West Ave Leadership Center, St John's Room","78213","Tue","11:00 AM",["O"]],
-["San Antonio","Wednesday 1 PM AFG","University United Methodist Church, 5084 De Zavala Rd","South Campus, Room 210","78249","Wed","1:00 PM",["O","B"]],
-["San Antonio","Winners Club – Tuesday Eve AFG","5411 Bandera Rd, Suite 406","Meeting place is behind HEB","78240","Tue","7:00 PM",["O"]],
-["San Antonio","AA & Al‑Anon Speaker Meeting — San Antonio Al‑Anon Information Service","102 Thames Dr","Hosted by Club 12","78216","Monthly","7:00 PM",["O","WC"],"1st Saturday of the month"],
-["San Antonio","Just for Today Alateen","102 Thames Dr","For teens — Alateen program","78216","Sat","11:00 AM",["C"],null,"alateen"],
-["Boerne","Boerne Hope AFG","St John's Lutheran Church (Shepherd House), 215 Rosewood Street","Shepherd House at Rosewood & Turner, next to the historic chapel","78006","Mon","7:00 PM",["O","D"]],
-["Boerne","Boerne Hope AFG","St John's Lutheran Church (Shepherd House), 215 Rosewood Street","Shepherd House at Rosewood & Turner, next to the historic chapel","78006","Thu","7:00 PM",["O","D"]],
+["San Antonio","Booster Shot AFG","St Andrews Episcopal Church, 6110 NW Loop 410","","78238","Thu","12:00 PM",["O","WC"]],
+["San Antonio","Calming Candlelight AFG","Winner's Club, 5413 Bandera Rd. Ste. 406","Meeting place is behind HEB","78240","Tue","7:00 PM",["O"]],
+["San Antonio","Club 12 – Recovering AFG (Adult Children of Alcoholics)","102 Thames Dr.","","78216","Sun","12:30 PM",["O","WC"]],
+["San Antonio","Club 12 – Serenity Now","102 Thames Dr.","","78216","Mon","11:00 AM",["O","WC","D","*"]],
+["San Antonio","Club 12 – Monday Stag Men's AFG","102 Thames Dr.","","78216","Mon","6:30 PM",["O","M","WC"]],
+["San Antonio","Club 12 – Solo Por Hoy GFA","102 Thames Dr.","","78216","Mon","8:00 PM",["O","S","WC"]],
+["San Antonio","Club 12 – Newcomers Tuesday Five Thirty AFG","102 Thames Dr.","","78216","Tue","5:30 PM",["O","N","WC","*"]],
+["San Antonio","Club 12 – How It Works AFG","102 Thames Dr.","","78216","Tue","11:00 AM",["O","WC","BS"]],
+["San Antonio","Club 12 – Freedom AFG","102 Thames Dr.","","78216","Wed","11:00 AM",["O","BS","WC","*"]],
+["San Antonio","Club 12 – Freedom AFG","102 Thames Dr.","","78216","Thu","11:00 AM",["O","BS","WC","*"]],
+["San Antonio","Club 12 – Circle of Hope AFG","102 Thames Dr.","Al-Anon Meeting room","78216","Fri","11:00 AM",["O","D","WC","*"]],
+["San Antonio","Club 12 – Solo Por Hoy GFA","102 Thames Dr.","","78216","Fri","7:00 PM",["O","S","WC"]],
+["San Antonio","Club 12 – Saturday 10AM Beginners AFG","102 Thames Dr.","","78216","Sat","10:00 AM",["O","N","WC"]],
+["San Antonio","Club 12 – Saturday 11 AM AFG","102 Thames Dr.","","78216","Sat","11:00 AM",["O","WC","D","AT","*"]],
+["San Antonio","El Torcido AFG","Bishop Jones Center, 111 Torcido Dr","Chapel House","78209","Thu","12:00 PM",["O","WC"]],
+["San Antonio","Gold Canyon AFG","St Mark the Evangelist Catholic Church, 1602 Thousand Oaks","Christopher Hall, Room 202 — elevator access","78232","Mon","12:00 PM",["C","L","D","WC","FF"]],
+["San Antonio","Gold Canyon AFG","St Mark the Evangelist Catholic Church, 1602 Thousand Oaks","Christopher Hall, Room 202 — elevator access","78232","Wed","12:00 PM",["C","BS","D","WC","FF"]],
+["San Antonio","Happy Destiny AFG","St George Episcopal Church, 6904 West Ave","Leadership Center, 2nd Floor","78213","Tue","7:00 PM",["O","B","WC"]],
+["San Antonio","Happy Hour AFG","St. Thomas Episcopal Church, 1416 N Loop 1604 E","Turning Point Portable building","78232","Wed","5:45 PM",["C"]],
+["San Antonio","Hula Hoop Women's AFG","Coker United Methodist Church, 231 E North Loop Rd","Health & Wellness Portable, back parking lot facing Wurzbach Pkwy — no meetings on Monday holidays","78216","Mon","6:30 PM",["O","L","WC","W"]],
+["San Antonio","North Loop Road AFG","Coker United Methodist Church, 231 E North Loop Rd","Health & Wellness Ctr, Lower Parking Lot","78216","Thu","7:00 PM",["O","B","WC","+"]],
+["San Antonio","Northwest San Antonio AFG","Zion Lutheran Church, 9944 Leslie Rd","Meets in the Family Life Center Bldg","78254","Wed","7:00 PM",["O","D","FF","WC"]],
+["San Antonio","Parents AFG","St. Davids Episcopal Church, 1300 Wiltshire Ave","In the Library","78209","Wed","7:00 PM",["O"]],
+["San Antonio","Rooted in Recovery AFG","Northwest Hills Global Methodist Church, 7575 Tezel Road","Sanctuary Bldg, Room 213","78250","Sat","9:00 AM",["O","WC"]],
+["San Antonio","Saturday Big Book AFG","University United Methodist Church, 5084 De Zavala Rd","Room C214-C215","78249","Sat","11:00 AM",["O","B","D","WC"]],
+["San Antonio","Serenity's Path AFG","Saint Francis Episcopal Church, 4242 Bluemel Rd","Portable Building Room C — look for the AA blue circle sign above the walkway","78240","Sat","10:00 AM",["O","WC"]],
+["San Antonio","Stepping Through Life AFG","St Thomas Episcopal Church, 1416 N Loop 1604 E","Portable Bldg. #5","78232","Sat","9:15 AM",["O","BS","D","WC"]],
+["San Antonio","Sunset AFG","Bulverde United Methodist, 28300 US Hwy 281 N","","78260","Tue","7:00 PM",["C","D","WC"]],
+["San Antonio","Using the Traditions in Relationships AFG","St Francis Episcopal Church, 4242 Bluemel","Room B — look for the AA blue circle sign above the walkway","78240","Tue","11:00 AM",["O","N","WC","+"]],
+["San Antonio","Wednesday 1 PM AFG","University United Methodist Church, 5084 De Zavala Rd","South Campus, Room 210 — hybrid, runs 1 hr 15 min; elevator access","78249","Wed","1:00 PM",["O","B","WC"]],
+["San Antonio","Wednesday Afternoon 3 PM AFG","The Village at Incarnate Word, 4707 Broadway","Meet in the Assembly Room","78209","Wed","3:00 PM",["O","WC"]],
+["Boerne","Boerne Hope AFG","Luther Hall @ St. John's Lutheran Church, 315 Rosewood Street","Ability to call into meeting","78006","Mon","7:00 PM",["O","D"]],
+["Boerne","Boerne Hope AFG","Luther Hall @ St. John's Lutheran Church, 315 Rosewood Street","Ability to call into meeting","78006","Thu","7:00 PM",["O","D"]],
+["Boerne","Boerne Noon Highway AFG","House of Hope, 40700 I-10 Frontage Road","Next to Faith Bible Church","78006","Wed","12:00 PM",["O","W"]],
+["Canyon Lake","Canyon Lake Solutions AFG","Church in the Valley, 14181 FM 306","Between Sattler & Canyon Lake Dam Road","78133","Wed","10:30 AM",["O","WC"]],
+["Canyon Lake","Canyon Lake AFG","St Francis Episcopal Church, 13250 Fm 306","Robert Jones Annex Building","78133","Wed","6:30 PM",["O","N","WC"]],
 ["Canyon Lake","Canyon Lake AFG","St Francis Episcopal Church, 13250 Fm 306","Robert Jones Annex Building","78133","Sat","10:00 AM",["O","N","WC"]],
-["Canyon Lake","Canyon Lake Solutions AFG","Church in the Valley, 14181 FM 306","Between Sattler & Canyon Lake Dam Rd","78133","Wed","10:30 AM",["O","WC"]],
-["Castroville","Heart Of The Matter AFG","Braden Keller Center, 610 Madrid St","","78009","Tue","7:00 PM",["C","N"]],
-["La Vernia","Courage To Change AFG","First Baptist Church – Clinic Bldg., 201 Crews Street","Frame building beside First Baptist Church, faces US Hwy 87","78121","Mon","7:00 PM",["O","SS","T"]],
-["La Vernia","Courage To Change AFG","First Baptist Church – Clinic Bldg., 201 Crews Street","Frame building beside First Baptist Church, faces US Hwy 87","78121","Thu","7:00 PM",["O"]],
-["New Braunfels","2 Rivers AFG","Two Four Club, 1142 Eikel St","","78130","Tue","7:00 PM",["O","WC"]],
-["New Braunfels","Just For Today AFG","Unity Church of New Braunfels, 408 Gruene Rd","Left side of the church, in back","78130","Wed","6:00 PM",["O","WC","D"]],
-["New Braunfels","Recovery In Gruene AFG","St Paul's Lutheran Church, 777 West San Antonio Street","","78130","Tue","12:00 PM",["C","WC"]],
+["Castroville","Heart Of The Matter AFG","Braden Keller Center, 1410 Amelia St","","78009","Tue","7:00 PM",["O"]],
+["La Vernia","Courage To Change AFG","First Baptist Church – Shack Bldg., 201 Crews Street","","78121","Thu","7:00 PM",["O"]],
+["New Braunfels","2 Rivers AFG","Two Four Club, 1142 Eikel St.","Park in rear or across the street","78130","Tue","7:00 PM",["O","WC"]],
 ["New Braunfels","New Beginnings AFG","Unity Church in New Braunfels, 408 Gruene Rd","","78130","Wed","7:00 PM",["O","WC"]],
+["New Braunfels","Recovery In Gruene AFG","St Paul's Lutheran Church, 777 West San Antonio Street","Meeting room 150 — from parking lot, through office double glass doors, straight to gym, immediate left","78130","Tue","12:00 PM",["C","WC"]],
+["New Braunfels","Serenity and Hope AFG","Gruene United Methodist Church, 2629 E. Common","Enter through sanctuary doors, Room 107 to the left","78130","Sun","5:00 PM",["O","WC"]],
+["Schertz","CCCS The Day AFG","Schertz-Cibolo, 1201 Oak St","","78148","Sun","2:30 PM",["C","N","WC"]],
 ["Schertz","Pass It On AFG","Schertz United Methodist Church, 3460 Roy Richard Dr","Room 206","78154","Thu","7:00 PM",["C","WC"]],
-["Seguin","Seguin AFG","First Baptist Church, 1314 Cedar St","Bldg. 3, Room 308 — back of property, enter door with ramp","78155","Fri","10:00 AM",["O","WC"]],
-["Seguin","Seguin Serenity AFG","Tri-Party Club, 2365 Huber Rd","First room to the right","78155","Tue","7:00 PM",["O","WC"]],
-["Spring Branch","Hill Country AFG","Hill Country Christian Church, 20845 State Highway 46 W","","78070","Thu","7:00 PM",["C","WC","D"]],
-["Spring Branch","Sunrise AFG","Community Bible Church Bulverde, 7100 US Highway 281 N","First room of middle portable building (P2)","78070","Mon","9:00 AM",["C","N","WC"]],
-["Universal City","Cccs The Day AFG","433 Kitty Hawk Rd","Bldg. 2, 2nd Floor, Suite 220 — no handicap access","78148","Sun","2:30 PM",["C","N"]]
+["Seguin","Seguin Serenity AFG","Tri-Party Club, 2365 Huber Rd.","Park in front lot — first room to the right","78155","Tue","7:00 PM",["O","N","WC"]],
+["Seguin","Seguin AFG","First Baptist Church, 1314 Cedar St","Bldg. 2, Room 206 — back of property, down sidewalk to 1st door","78155","Fri","10:00 AM",["O","WC"]],
+["Spring Branch","Sunrise AFG","Home Church, 7100 US Highway 281 N","Portable — look for sign","78070","Mon","9:00 AM",["C","N","WC"]],
+["Boerne","Boerne Alateen","Shepard House @ St John's Lutheran Church, 315 Rosewood St","Ages 13–18 — enter Narthex of main church from Turner & go upstairs to 2nd floor","78006","Mon","7:00 PM",["C","D"],null,"alateen"],
+["San Antonio","Club 12 – Saturday 11:00AM","102 Thames Dr.","Club 12 – Serenity Room","78216","Sat","11:00 AM",["O","WC","D","*"]],
+["San Antonio","AA & Al‑Anon Speaker Meeting — San Antonio Al‑Anon Information Service","102 Thames Dr.","Club 12 – Al-Anon Room","78216","Monthly","7:00 PM",["O","WC"],"1st Saturday of the month"],
+["San Antonio","Cathedral Park AFG","Electronic Meeting","Zoom Meeting ID: 873 3719 6138, Passcode: serenity","78205","Mon","12:00 PM",["O"],null,"electronic"],
+["New Braunfels","Just For Today AFG","Unity Church of New Braunfels, 408 Gruene Rd","Temporary Zoom meeting — Meeting ID 332 431 069, Passcode: recovery. 30-minute open discussion. Contact Cyndie (512) 393-8734 or Patsy (512) 771-8182","78130","Wed","6:00 PM",["O","WC","D"]],
+["San Antonio","Happy Destiny AFG","Zoom Meeting ID 961 4934 9058, Passcode: 000576","Currently meeting on Zoom only","78213","Mon","7:00 PM",["O","B"],null,"electronic"],
+["San Antonio","Happy Destiny AFG","Zoom Meeting ID 961 4934 9058, Passcode: 000576","Currently meeting on Zoom only","78213","Thu","7:00 PM",["O","B"],null,"electronic"]
 ];
 
 const MEETINGS = RAW.map((r,i)=>{
@@ -686,7 +683,7 @@ const LEGEND = {
   D:"Discussion meeting", B:"Babysitting available", M:"Men only", W:"Women only",
   N:"Newcomer / beginners focused", BS:"Book study", SS:"12 Steps study", T:"12 Traditions discussion",
   C:"Families & friends only (closed)", FF:"Fragrance free", AT:"Alateen meets at the same time",
-  "*":"AA meeting happening at the same time", "+":"Non Al-Anon literature used"
+  L:"Literature meeting", "*":"AA meeting happening at the same time", "+":"Non Al-Anon literature used"
 };
 
 const DAY_ORDER = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
@@ -739,7 +736,7 @@ cities.forEach(c=>{
   cityChipsEl.appendChild(b);
 });
 
-const typeOrder = ["O","C","S","N","D","WC","B","M","W","BS","SS","T","FF"];
+const typeOrder = ["O","C","S","N","D","WC","B","M","W","BS","SS","T","FF","L"];
 const typeChipsEl = document.getElementById('typeChips');
 typeOrder.forEach(t=>{
   const b=document.createElement('button');
@@ -945,10 +942,20 @@ function render(){
   listEl.innerHTML = items.map((m,idx)=>{
     const dayLabel = m.day==="Monthly" ? m.monthlyLabel : DAY_FULL[m.day];
     const isMonthly = m.day==="Monthly";
+    const isElectronic = m.special==='electronic';
     const saved = myList.has(m.id);
-    const distChip = (m.dist!==undefined) ? `<span class="dist-chip">${m.dist<1 ? '<1' : m.dist.toFixed(1)} mi away</span>` : '';
+    const distChip = (m.dist!==undefined && !isElectronic) ? `<span class="dist-chip">${m.dist<1 ? '<1' : m.dist.toFixed(1)} mi away</span>` : '';
     const badges = m.types.map(t=>`<span class="badge${t==='AT'?' alateen':''}" title="${LEGEND[t]||''}">${t}</span>`).join('');
     const alateenBadge = m.special==='alateen' ? `<span class="badge alateen">Alateen</span>` : '';
+    const zoomBadge = isElectronic ? `<span class="badge alateen">Zoom only</span>` : '';
+    const locationLine = isElectronic
+      ? `<p class="addr-detail">${m.city} group — meets on Zoom only</p>`
+      : `<p class="addr-detail">${m.city}, TX ${m.zip}</p>`;
+    const directionsLink = isElectronic ? '' : `
+        <a class="map-link" href="${mapsUrl(m)}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Directions
+        </a>`;
     return `<article class="card" style="animation-delay:${Math.min(idx*30,300)}ms">
       <div class="card-top">
         <div>
@@ -963,13 +970,10 @@ function render(){
       <hr class="divider">
       <p class="addr">${m.address}</p>
       ${m.detail ? `<p class="addr-detail">${m.detail}</p>` : ''}
-      <p class="addr-detail">${m.city}, TX ${m.zip}</p>
+      ${locationLine}
       <div class="card-footer">
-        <div class="badges">${badges}${alateenBadge}</div>
-        <a class="map-link" href="${mapsUrl(m)}" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Directions
-        </a>
+        <div class="badges">${badges}${alateenBadge}${zoomBadge}</div>
+        ${directionsLink}
       </div>
     </article>`;
   }).join('');
