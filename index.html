@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>San Antonio Al‑Anon Meeting Finder — District 12</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Al-Anon SA">
+<meta name="theme-color" content="#00335F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F1E6;
+    --card:#FFFDF9;
+    --ink:#22303B;
+    --ink-soft:#5B6B74;
+    --rail:#0054A5;
+    --rail-dark:#00335F;
+    --amber:#C97A2E;
+    --amber-soft:#F1E0C9;
+    --line:#DED4BD;
+    --good:#4C7A5D;
+    --good-soft:#DDE9DF;
+    --shadow: 0 1px 2px rgba(29,58,72,0.06), 0 4px 14px rgba(29,58,72,0.07);
+    --radius: 14px;
+  }
+  html{overflow-x:hidden; width:100%;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    overflow-x:hidden;
+    max-width:100vw;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:96px;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(47,84,104,0.07) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  a{color:inherit;}
+  button{font-family:inherit;}
+  :focus-visible{outline:3px solid var(--amber); outline-offset:2px;}
+
+  /* ---------- HEADER ---------- */
+  header.top{
+    background:var(--rail-dark);
+    color:#F5F1E6;
+    padding:22px 18px 20px;
+    border-bottom:4px solid var(--amber);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#B9CBD3;
+    margin:0 0 6px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:26px;
+    line-height:1.15;
+    margin:0 0 6px;
+  }
+  .sub{
+    font-size:13.5px;
+    color:#C7D6DB;
+    margin:0;
+    max-width:46ch;
+  }
+
+  /* ---------- STICKY CONTROLS ---------- */
+  .controls{
+    position:sticky;
+    top:0;
+    z-index:30;
+    background:var(--paper);
+    padding:12px 14px 10px;
+    border-bottom:1px solid var(--line);
+    box-shadow:0 2px 8px rgba(29,58,72,0.05);
+  }
+  .search-row{
+    display:flex;
+    gap:8px;
+    margin-bottom:10px;
+  }
+  .search-wrap{
+    flex:1;
+    min-width:0;
+    position:relative;
+  }
+  .search-wrap input{
+    width:100%;
+    padding:11px 12px 11px 34px;
+    border-radius:10px;
+    border:1.5px solid var(--line);
+    background:var(--card);
+    font-size:15px;
+    color:var(--ink);
+  }
+  .search-wrap svg{
+    position:absolute;
+    left:10px; top:50%;
+    transform:translateY(-50%);
+    width:16px;height:16px;
+    color:var(--ink-soft);
+  }
+  .icon-btn{
+    display:flex;align-items:center;justify-content:center;
+    width:42px;height:42px;
+    border-radius:10px;
+    border:1.5px solid var(--line);
+    background:var(--card);
+    color:var(--rail);
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .icon-btn.active{ background:var(--rail); color:#fff; border-color:var(--rail); }
+
+  .tabs{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:4px;
+    scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{
+    flex-shrink:0;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.03em;
+    padding:7px 12px 6px;
+    border-radius:8px 8px 3px 3px;
+    background:var(--card);
+    border:1.5px solid var(--line);
+    border-bottom:3px solid var(--line);
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .tab.active{
+    color:#fff;
+    background:var(--rail);
+    border-color:var(--rail);
+    border-bottom:3px solid var(--amber);
+  }
+
+  .near-row{
+    display:flex; align-items:center; gap:8px;
+    margin-top:10px;
+    flex-wrap:wrap;
+  }
+  .zip-wrap{
+    display:flex;
+    gap:8px;
+    flex:1;
+    min-width:0;
+  }
+  .zip-wrap input{
+    flex:1;
+    min-width:0;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1.5px solid var(--line);
+    background:var(--card);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .near-btn{
+    display:flex;align-items:center;gap:7px;
+    background:var(--amber);
+    color:#2A1C0C;
+    border:none;
+    padding:9px 14px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:13.5px;
+    cursor:pointer;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .near-btn svg{width:15px;height:15px;}
+  .near-status{
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .clear-loc{
+    font-size:12px;
+    color:var(--rail);
+    text-decoration:underline;
+    background:none;border:none;cursor:pointer;
+    padding:4px;
+  }
+
+  /* filter panel */
+  .panel{
+    display:none;
+    margin-top:10px;
+    padding:12px;
+    background:var(--card);
+    border:1.5px solid var(--line);
+    border-radius:12px;
+  }
+  .panel.open{display:block;}
+  .panel h3{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  .chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .chip{
+    font-size:12.5px;
+    padding:6px 10px;
+    border-radius:99px;
+    border:1.5px solid var(--line);
+    background:var(--paper);
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .chip.on{ background:var(--rail); color:#fff; border-color:var(--rail); }
+  .panel-actions{display:flex; justify-content:space-between; align-items:center;}
+  .link-btn{background:none;border:none;color:var(--rail);font-size:13px;text-decoration:underline;cursor:pointer;padding:4px 0;}
+
+  /* ---------- LIST ---------- */
+  main{padding:16px 14px 8px; max-width:640px; margin:0 auto;}
+  .count-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin:2px 4px 14px;
+  }
+  .empty{
+    text-align:center;
+    padding:50px 20px;
+    color:var(--ink-soft);
+  }
+  .empty svg{width:40px;height:40px;opacity:.5;margin-bottom:10px;}
+
+  .card{
+    position:relative;
+    background:var(--card);
+    border:1.5px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    margin-bottom:14px;
+    padding:16px 16px 14px 16px;
+    opacity:0;
+    transform:translateY(6px);
+    animation:cardIn .4s ease forwards;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .card{animation:none; opacity:1; transform:none;}
+  }
+  @keyframes cardIn{ to{opacity:1; transform:translateY(0);} }
+
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .tag-day{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.05em;
+    color:#fff;
+    background:var(--rail);
+    padding:3px 8px;
+    border-radius:5px;
+    display:inline-block;
+    margin-bottom:8px;
+  }
+  .tag-day.monthly{ background:var(--amber); color:#2A1C0C; }
+  .star-btn{
+    background:none;border:none;cursor:pointer;
+    width:30px;height:30px;flex-shrink:0;
+    color:var(--line);
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    border:1.5px solid var(--line);
+  }
+  .star-btn.saved{ color:var(--amber); border-color:var(--amber); background:var(--amber-soft); }
+  .star-btn svg{width:15px;height:15px;}
+
+  .group-name{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:17.5px;
+    line-height:1.25;
+    margin:0 0 6px;
+  }
+  .time-row{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    font-weight:600;
+    color:var(--rail);
+    margin-bottom:8px;
+  }
+  .divider{
+    border:none;
+    border-top:1.5px dashed var(--line);
+    margin:10px 0;
+  }
+  .addr{
+    font-size:13.5px;
+    color:var(--ink);
+    line-height:1.45;
+    margin-bottom:2px;
+  }
+  .addr-detail{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.4;
+  }
+  .card-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:12px;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .badges{display:flex;flex-wrap:wrap;gap:5px;}
+  .badge{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    font-weight:600;
+    padding:3px 6px;
+    border-radius:4px;
+    background:var(--good-soft);
+    color:var(--good);
+    letter-spacing:.02em;
+  }
+  .badge.alateen{ background:#E3DCF0; color:#5B3E96; }
+  .map-link{
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--rail);
+    text-decoration:none;
+    display:flex;align-items:center;gap:4px;
+    white-space:nowrap;
+  }
+  .map-link svg{width:13px;height:13px;}
+  .dist-chip{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    font-weight:600;
+    color:var(--rail-dark);
+    background:var(--amber-soft);
+    padding:3px 8px;
+    border-radius:99px;
+  }
+
+  /* ---------- FLOATING MY LIST BUTTON ---------- */
+  .fab{
+    position:fixed;
+    bottom:18px; right:18px;
+    background:var(--rail-dark);
+    color:#fff;
+    border:none;
+    border-radius:99px;
+    padding:13px 18px;
+    display:flex;align-items:center;gap:8px;
+    box-shadow:0 6px 18px rgba(29,58,72,0.35);
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+    z-index:40;
+  }
+  .fab svg{width:16px;height:16px;}
+  .fab .badge-count{
+    background:var(--amber);
+    color:#2A1C0C;
+    border-radius:99px;
+    font-size:11px;
+    padding:1px 7px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  /* ---------- OVERLAYS ---------- */
+  .overlay{
+    position:fixed; inset:0;
+    background:rgba(20,30,36,0.55);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:50;
+  }
+  .overlay.open{display:flex;}
+  .sheet{
+    background:var(--paper);
+    width:100%;
+    max-width:640px;
+    max-height:85vh;
+    overflow-y:auto;
+    border-radius:20px 20px 0 0;
+    padding:18px 18px 24px;
+    animation:sheetUp .25s ease;
+  }
+  @keyframes sheetUp{ from{transform:translateY(30px); opacity:.6;} to{transform:translateY(0); opacity:1;} }
+  .sheet-head{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:14px;
+  }
+  .sheet-head h2{
+    font-family:'Fraunces',serif;
+    font-size:20px; margin:0;
+  }
+  .close-x{
+    background:none;border:none;cursor:pointer;
+    width:32px;height:32px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink-soft);
+  }
+  .close-x svg{width:18px;height:18px;}
+
+  .mylist-item{
+    background:var(--card);
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:10px 12px;
+    margin-bottom:8px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+  }
+  .mylist-item .info{font-size:13.5px;}
+  .mylist-item .info b{font-family:'Fraunces',serif;font-weight:600;display:block;font-size:14.5px;margin-bottom:2px;}
+  .mylist-item .info span{color:var(--ink-soft);}
+  .remove-btn{
+    background:none;border:none;color:var(--ink-soft);cursor:pointer;
+    width:26px;height:26px;flex-shrink:0;
+  }
+  .remove-btn svg{width:15px;height:15px;}
+
+  .share-actions{
+    display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;
+  }
+  .share-btn{
+    flex:1;
+    min-width:120px;
+    display:flex;align-items:center;justify-content:center;gap:7px;
+    background:var(--rail);
+    color:#fff;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:13.5px;
+    cursor:pointer;
+  }
+  .share-btn.secondary{ background:var(--card); color:var(--rail); border:1.5px solid var(--rail); }
+  .share-btn svg{width:15px;height:15px;}
+  .mylist-empty{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:13.5px;
+    padding:24px 10px;
+  }
+
+  .legend-grid{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:8px 12px;
+    font-size:13.5px;
+  }
+  .legend-grid dt{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    color:var(--rail);
+  }
+  .legend-grid dd{margin:0;color:var(--ink);}
+
+  footer{
+    text-align:center;
+    padding:26px 16px 10px;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    line-height:1.6;
+  }
+  footer b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<noscript>
+  <div style="max-width:600px;margin:24px auto;padding:16px 18px;background:#FBE9C6;border:1.5px solid #C97A2E;border-radius:12px;font-family:sans-serif;color:#2A1C0C;line-height:1.5;">
+    <strong>The meeting list needs JavaScript to display, and it's currently blocked or disabled.</strong><br>
+    This usually happens when a file is opened straight from a text message or email preview instead of a real browser. Try: tap the file → <strong>Save to Files</strong> (iPhone) or <strong>Download</strong> (Android) → open it from there in Safari or Chrome.
+  </div>
+</noscript>
+
+<header class="top">
+  <p class="eyebrow">District 12 · Area 53, Texas East</p>
+  <h1>San Antonio Al‑Anon Meeting Finder</h1>
+  <p class="sub">Find a meeting by day, type, or distance — for family and friends of people who drink. You are not alone.</p>
+</header>
+
+<div class="controls">
+  <div class="search-row">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="searchInput" type="text" placeholder="Search group, address, or city…" autocomplete="off">
+    </div>
+    <button class="icon-btn" id="filterToggle" aria-label="Filter by meeting type" title="Filter by meeting type">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+    </button>
+    <button class="icon-btn" id="legendToggle" aria-label="What do the letters mean?" title="What do the letters mean?">?</button>
+  </div>
+
+  <div class="tabs" id="dayTabs"></div>
+
+  <div class="near-row">
+    <div class="zip-wrap">
+      <input id="zipInput" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="5" placeholder="Your ZIP code" aria-label="Your ZIP code">
+      <button class="near-btn" id="zipGoBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 L15 9 L22 12 L15 15 L12 22 L9 15 L2 12 L9 9 Z"/></svg>
+        Find nearest
+      </button>
+    </div>
+  </div>
+  <div class="near-row" style="margin-top:6px;">
+    <span class="near-status" id="nearStatus"></span>
+    <button class="clear-loc" id="clearLoc" style="display:none;">clear</button>
+  </div>
+
+  <div class="panel" id="filterPanel">
+    <h3>City / area</h3>
+    <div class="chip-row" id="cityChips"></div>
+    <h3>Meeting type</h3>
+    <div class="chip-row" id="typeChips"></div>
+    <div class="panel-actions">
+      <button class="link-btn" id="resetFilters">Reset filters</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <p class="count-line" id="countLine"></p>
+  <div id="list"></div>
+</main>
+
+<button class="fab" id="fabBtn">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+  My List <span class="badge-count" id="fabCount">0</span>
+</button>
+
+<!-- MY LIST SHEET -->
+<div class="overlay" id="myListOverlay">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2>My meetings</h2>
+      <button class="close-x" id="closeMyList" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin-top:-8px;">Tap the star on any meeting to add it here. This list is saved only on this device — share it with a newcomer any time.</p>
+    <div id="myListContent"></div>
+    <div class="share-actions">
+      <button class="share-btn" id="shareText">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Text
+      </button>
+      <button class="share-btn" id="shareEmail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6 12 13 2 6"/></svg>
+        Email
+      </button>
+      <button class="share-btn secondary" id="shareCopy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- LEGEND SHEET -->
+<div class="overlay" id="legendOverlay">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2>What the letters mean</h2>
+      <button class="close-x" id="closeLegend" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <dl class="legend-grid" id="legendGrid"></dl>
+  </div>
+</div>
+
+<footer>
+  Source list updated <b>05-04-2022</b> by District&nbsp;12, Area&nbsp;53 — Texas East. Meetings can change; call ahead when possible.<br>
+  Distances are estimated from each meeting's ZIP code, not the exact building. This page works offline once loaded and saves nothing beyond this device.
+</footer>
+
+<script>
+/* ---------------- DATA ---------------- */
+// Coordinates are ZIP-code centroids (approximate), sufficient for sorting by nearest.
+const ZIP = {
+  '78201':[29.469,-98.531], '78238':[29.480,-98.597], '78209':[29.479,-98.462],
+  '78216':[29.523,-98.498], '78249':[29.568,-98.617], '78213':[29.503,-98.516],
+  '78232':[29.564,-98.491], '78240':[29.510,-98.579], '78254':[29.523,-98.706],
+  '78250':[29.489,-98.741], '78205':[29.425,-98.489],
+  '78260':[29.716,-98.467], '78006':[29.826,-98.775], '78133':[29.874,-98.264],
+  '78009':[29.353,-98.880], '78121':[29.348,-98.113], '78130':[29.703,-98.124],
+  '78154':[29.552,-98.263], '78155':[29.568,-97.960], '78070':[29.869,-98.397],
+  '78148':[29.548,-98.293]
+};
+function ll(zip){ return ZIP[zip] || [29.4241,-98.4936]; }
+
+const RAW = [
+["San Antonio","Booster Shot AFG","St Andrews Episcopal Church, 6110 NW Loop 410","","78238","Thu","12:00 PM",["O","WC"]],
+["San Antonio","Calming Candlelight AFG","Winner's Club, 5413 Bandera Rd. Ste. 406","Meeting place is behind HEB","78240","Tue","7:00 PM",["O"]],
+["San Antonio","Club 12 – Recovering AFG (Adult Children of Alcoholics)","102 Thames Dr.","","78216","Sun","12:30 PM",["O","WC"]],
+["San Antonio","Club 12 – Serenity Now","102 Thames Dr.","","78216","Mon","11:00 AM",["O","WC","D","*"]],
+["San Antonio","Club 12 – Monday Stag Men's AFG","102 Thames Dr.","","78216","Mon","6:30 PM",["O","M","WC"]],
+["San Antonio","Club 12 – Solo Por Hoy GFA","102 Thames Dr.","","78216","Mon","8:00 PM",["O","S","WC"]],
+["San Antonio","Club 12 – Newcomers Tuesday Five Thirty AFG","102 Thames Dr.","","78216","Tue","5:30 PM",["O","N","WC","*"]],
+["San Antonio","Club 12 – How It Works AFG","102 Thames Dr.","","78216","Tue","11:00 AM",["O","WC","BS"]],
+["San Antonio","Club 12 – Freedom AFG","102 Thames Dr.","","78216","Wed","11:00 AM",["O","BS","WC","*"]],
+["San Antonio","Club 12 – Freedom AFG","102 Thames Dr.","","78216","Thu","11:00 AM",["O","BS","WC","*"]],
+["San Antonio","Club 12 – Circle of Hope AFG","102 Thames Dr.","Al-Anon Meeting room","78216","Fri","11:00 AM",["O","D","WC","*"]],
+["San Antonio","Club 12 – Solo Por Hoy GFA","102 Thames Dr.","","78216","Fri","7:00 PM",["O","S","WC"]],
+["San Antonio","Club 12 – Saturday 10AM Beginners AFG","102 Thames Dr.","","78216","Sat","10:00 AM",["O","N","WC"]],
+["San Antonio","Club 12 – Saturday 11 AM AFG","102 Thames Dr.","","78216","Sat","11:00 AM",["O","WC","D","AT","*"]],
+["San Antonio","El Torcido AFG","Bishop Jones Center, 111 Torcido Dr","Chapel House","78209","Thu","12:00 PM",["O","WC"]],
+["San Antonio","Gold Canyon AFG","St Mark the Evangelist Catholic Church, 1602 Thousand Oaks","Christopher Hall, Room 202 — elevator access","78232","Mon","12:00 PM",["C","L","D","WC","FF"]],
+["San Antonio","Gold Canyon AFG","St Mark the Evangelist Catholic Church, 1602 Thousand Oaks","Christopher Hall, Room 202 — elevator access","78232","Wed","12:00 PM",["C","BS","D","WC","FF"]],
+["San Antonio","Happy Destiny AFG","St George Episcopal Church, 6904 West Ave","Leadership Center, 2nd Floor","78213","Tue","7:00 PM",["O","B","WC"]],
+["San Antonio","Happy Hour AFG","St. Thomas Episcopal Church, 1416 N Loop 1604 E","Turning Point Portable building","78232","Wed","5:45 PM",["C"]],
+["San Antonio","Hula Hoop Women's AFG","Coker United Methodist Church, 231 E North Loop Rd","Health & Wellness Portable, back parking lot facing Wurzbach Pkwy — no meetings on Monday holidays","78216","Mon","6:30 PM",["O","L","WC","W"]],
+["San Antonio","North Loop Road AFG","Coker United Methodist Church, 231 E North Loop Rd","Health & Wellness Ctr, Lower Parking Lot","78216","Thu","7:00 PM",["O","B","WC","+"]],
+["San Antonio","Northwest San Antonio AFG","Zion Lutheran Church, 9944 Leslie Rd","Meets in the Family Life Center Bldg","78254","Wed","7:00 PM",["O","D","FF","WC"]],
+["San Antonio","Parents AFG","St. Davids Episcopal Church, 1300 Wiltshire Ave","In the Library","78209","Wed","7:00 PM",["O"]],
+["San Antonio","Rooted in Recovery AFG","Northwest Hills Global Methodist Church, 7575 Tezel Road","Sanctuary Bldg, Room 213","78250","Sat","9:00 AM",["O","WC"]],
+["San Antonio","Saturday Big Book AFG","University United Methodist Church, 5084 De Zavala Rd","Room C214-C215","78249","Sat","11:00 AM",["O","B","D","WC"]],
+["San Antonio","Serenity's Path AFG","Saint Francis Episcopal Church, 4242 Bluemel Rd","Portable Building Room C — look for the AA blue circle sign above the walkway","78240","Sat","10:00 AM",["O","WC"]],
+["San Antonio","Stepping Through Life AFG","St Thomas Episcopal Church, 1416 N Loop 1604 E","Portable Bldg. #5","78232","Sat","9:15 AM",["O","BS","D","WC"]],
+["San Antonio","Sunset AFG","Bulverde United Methodist, 28300 US Hwy 281 N","","78260","Tue","7:00 PM",["C","D","WC"]],
+["San Antonio","Using the Traditions in Relationships AFG","St Francis Episcopal Church, 4242 Bluemel","Room B — look for the AA blue circle sign above the walkway","78240","Tue","11:00 AM",["O","N","WC","+"]],
+["San Antonio","Wednesday 1 PM AFG","University United Methodist Church, 5084 De Zavala Rd","South Campus, Room 210 — hybrid, runs 1 hr 15 min; elevator access","78249","Wed","1:00 PM",["O","B","WC"]],
+["San Antonio","Wednesday Afternoon 3 PM AFG","The Village at Incarnate Word, 4707 Broadway","Meet in the Assembly Room","78209","Wed","3:00 PM",["O","WC"]],
+["Boerne","Boerne Hope AFG","Luther Hall @ St. John's Lutheran Church, 315 Rosewood Street","Ability to call into meeting","78006","Mon","7:00 PM",["O","D"]],
+["Boerne","Boerne Hope AFG","Luther Hall @ St. John's Lutheran Church, 315 Rosewood Street","Ability to call into meeting","78006","Thu","7:00 PM",["O","D"]],
+["Boerne","Boerne Noon Highway AFG","House of Hope, 40700 I-10 Frontage Road","Next to Faith Bible Church","78006","Wed","12:00 PM",["O","W"]],
+["Canyon Lake","Canyon Lake Solutions AFG","Church in the Valley, 14181 FM 306","Between Sattler & Canyon Lake Dam Road","78133","Wed","10:30 AM",["O","WC"]],
+["Canyon Lake","Canyon Lake AFG","St Francis Episcopal Church, 13250 Fm 306","Robert Jones Annex Building","78133","Wed","6:30 PM",["O","N","WC"]],
+["Canyon Lake","Canyon Lake AFG","St Francis Episcopal Church, 13250 Fm 306","Robert Jones Annex Building","78133","Sat","10:00 AM",["O","N","WC"]],
+["Castroville","Heart Of The Matter AFG","Braden Keller Center, 1410 Amelia St","","78009","Tue","7:00 PM",["O"]],
+["La Vernia","Courage To Change AFG","First Baptist Church – Shack Bldg., 201 Crews Street","","78121","Thu","7:00 PM",["O"]],
+["New Braunfels","2 Rivers AFG","Two Four Club, 1142 Eikel St.","Park in rear or across the street","78130","Tue","7:00 PM",["O","WC"]],
+["New Braunfels","New Beginnings AFG","Unity Church in New Braunfels, 408 Gruene Rd","","78130","Wed","7:00 PM",["O","WC"]],
+["New Braunfels","Recovery In Gruene AFG","St Paul's Lutheran Church, 777 West San Antonio Street","Meeting room 150 — from parking lot, through office double glass doors, straight to gym, immediate left","78130","Tue","12:00 PM",["C","WC"]],
+["New Braunfels","Serenity and Hope AFG","Gruene United Methodist Church, 2629 E. Common","Enter through sanctuary doors, Room 107 to the left","78130","Sun","5:00 PM",["O","WC"]],
+["Schertz","CCCS The Day AFG","Schertz-Cibolo, 1201 Oak St","","78148","Sun","2:30 PM",["C","N","WC"]],
+["Schertz","Pass It On AFG","Schertz United Methodist Church, 3460 Roy Richard Dr","Room 206","78154","Thu","7:00 PM",["C","WC"]],
+["Seguin","Seguin Serenity AFG","Tri-Party Club, 2365 Huber Rd.","Park in front lot — first room to the right","78155","Tue","7:00 PM",["O","N","WC"]],
+["Seguin","Seguin AFG","First Baptist Church, 1314 Cedar St","Bldg. 2, Room 206 — back of property, down sidewalk to 1st door","78155","Fri","10:00 AM",["O","WC"]],
+["Spring Branch","Sunrise AFG","Home Church, 7100 US Highway 281 N","Portable — look for sign","78070","Mon","9:00 AM",["C","N","WC"]],
+["Boerne","Boerne Alateen","Shepard House @ St John's Lutheran Church, 315 Rosewood St","Ages 13–18 — enter Narthex of main church from Turner & go upstairs to 2nd floor","78006","Mon","7:00 PM",["C","D"],null,"alateen"],
+["San Antonio","Club 12 – Saturday 11:00AM","102 Thames Dr.","Club 12 – Serenity Room","78216","Sat","11:00 AM",["O","WC","D","*"]],
+["San Antonio","AA & Al‑Anon Speaker Meeting — San Antonio Al‑Anon Information Service","102 Thames Dr.","Club 12 – Al-Anon Room","78216","Monthly","7:00 PM",["O","WC"],"1st Saturday of the month"],
+["San Antonio","Cathedral Park AFG","Electronic Meeting","Zoom Meeting ID: 873 3719 6138, Passcode: serenity","78205","Mon","12:00 PM",["O"],null,"electronic"],
+["New Braunfels","Just For Today AFG","Unity Church of New Braunfels, 408 Gruene Rd","Temporary Zoom meeting — Meeting ID 332 431 069, Passcode: recovery. 30-minute open discussion. Contact Cyndie (512) 393-8734 or Patsy (512) 771-8182","78130","Wed","6:00 PM",["O","WC","D"]],
+["San Antonio","Happy Destiny AFG","Zoom Meeting ID 961 4934 9058, Passcode: 000576","Currently meeting on Zoom only","78213","Mon","7:00 PM",["O","B"],null,"electronic"],
+["San Antonio","Happy Destiny AFG","Zoom Meeting ID 961 4934 9058, Passcode: 000576","Currently meeting on Zoom only","78213","Thu","7:00 PM",["O","B"],null,"electronic"]
+];
+
+const MEETINGS = RAW.map((r,i)=>{
+  const [city,group,address,detail,zip,day,time,types,monthlyLabel,special] = r;
+  const [lat,lng] = ll(zip);
+  return {id:i, city, group, address, detail, zip, day, time, types, monthlyLabel: monthlyLabel||null, special: special||null, lat, lng};
+});
+
+const LEGEND = {
+  O:"Families, friends & observers welcome", S:"Spanish language", WC:"Wheelchair accessible",
+  D:"Discussion meeting", B:"Babysitting available", M:"Men only", W:"Women only",
+  N:"Newcomer / beginners focused", BS:"Book study", SS:"12 Steps study", T:"12 Traditions discussion",
+  C:"Families & friends only (closed)", FF:"Fragrance free", AT:"Alateen meets at the same time",
+  L:"Literature meeting", "*":"AA meeting happening at the same time", "+":"Non Al-Anon literature used"
+};
+
+const DAY_ORDER = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+const DAY_FULL = {Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday",Sat:"Saturday",Sun:"Sunday",Monthly:"Monthly"};
+const JS_DAY_TO_ABBR = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+/* ---------------- STATE ---------------- */
+let state = {
+  dayFilter: JS_DAY_TO_ABBR[new Date().getDay()],
+  search: "",
+  cities: new Set(),
+  types: new Set(),
+  userLoc: null,
+  sortNearest: false
+};
+let myList = new Set(JSON.parse(localStorage.getItem('alanon_mylist_v1') || '[]'));
+
+/* ---------------- BUILD CONTROLS ---------------- */
+const dayTabsEl = document.getElementById('dayTabs');
+const tabDefs = [["Today","Today"], ...DAY_ORDER.map(d=>[d,d]), ["Monthly","Monthly"], ["All","All"]];
+tabDefs.forEach(([key,label])=>{
+  const b=document.createElement('button');
+  b.className='tab'; b.textContent=label; b.dataset.key=key;
+  b.addEventListener('click',()=>{
+    state.dayFilter = key==="Today" ? JS_DAY_TO_ABBR[new Date().getDay()] : key;
+    state.dayFilterKey = key;
+    renderTabs(); render();
+  });
+  dayTabsEl.appendChild(b);
+});
+state.dayFilterKey = "Today";
+
+function renderTabs(){
+  [...dayTabsEl.children].forEach(b=>{
+    b.classList.toggle('active', b.dataset.key === state.dayFilterKey);
+  });
+}
+renderTabs();
+
+const cities = [...new Set(MEETINGS.map(m=>m.city))].sort();
+const cityChipsEl = document.getElementById('cityChips');
+cities.forEach(c=>{
+  const b=document.createElement('button');
+  b.className='chip'; b.textContent=c;
+  b.addEventListener('click',()=>{
+    state.cities.has(c) ? state.cities.delete(c) : state.cities.add(c);
+    b.classList.toggle('on');
+    render();
+  });
+  cityChipsEl.appendChild(b);
+});
+
+const typeOrder = ["O","C","S","N","D","WC","B","M","W","BS","SS","T","FF","L"];
+const typeChipsEl = document.getElementById('typeChips');
+typeOrder.forEach(t=>{
+  const b=document.createElement('button');
+  b.className='chip'; b.textContent=t; b.title=LEGEND[t];
+  b.addEventListener('click',()=>{
+    state.types.has(t) ? state.types.delete(t) : state.types.add(t);
+    b.classList.toggle('on');
+    render();
+  });
+  typeChipsEl.appendChild(b);
+});
+
+document.getElementById('filterToggle').addEventListener('click', (e)=>{
+  document.getElementById('filterPanel').classList.toggle('open');
+  e.currentTarget.classList.toggle('active');
+});
+document.getElementById('resetFilters').addEventListener('click', ()=>{
+  state.cities.clear(); state.types.clear();
+  [...cityChipsEl.children,...typeChipsEl.children].forEach(c=>c.classList.remove('on'));
+  render();
+});
+document.getElementById('searchInput').addEventListener('input', (e)=>{
+  state.search = e.target.value.trim().toLowerCase();
+  render();
+});
+
+/* legend */
+const legendGridEl = document.getElementById('legendGrid');
+Object.entries(LEGEND).forEach(([k,v])=>{
+  const dt=document.createElement('dt'); dt.textContent=k;
+  const dd=document.createElement('dd'); dd.textContent=v;
+  legendGridEl.appendChild(dt); legendGridEl.appendChild(dd);
+});
+document.getElementById('legendToggle').addEventListener('click',()=>toggleOverlay('legendOverlay',true));
+document.getElementById('closeLegend').addEventListener('click',()=>toggleOverlay('legendOverlay',false));
+
+/* ---------------- GEOLOCATION ---------------- */
+function haversine(lat1,lon1,lat2,lon2){
+  const R=3958.8;
+  const dLat=(lat2-lat1)*Math.PI/180, dLon=(lon2-lon1)*Math.PI/180;
+  const a=Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+document.getElementById('zipGoBtn').addEventListener('click', handleZipSearch);
+document.getElementById('zipInput').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter') handleZipSearch();
+});
+
+async function geocodeZip(zip){
+  // Known meeting ZIPs resolve instantly and work offline.
+  if(ZIP[zip]) return ZIP[zip];
+  // Otherwise look it up online (requires an internet connection).
+  try{
+    const res = await fetch(`https://api.zippopotam.us/us/${zip}`);
+    if(!res.ok) throw new Error('not found');
+    const data = await res.json();
+    const place = data.places && data.places[0];
+    if(!place) throw new Error('no place');
+    return [parseFloat(place.latitude), parseFloat(place.longitude)];
+  }catch(e){
+    return null;
+  }
+}
+
+async function handleZipSearch(){
+  const statusEl = document.getElementById('nearStatus');
+  const zip = document.getElementById('zipInput').value.trim();
+  if(!/^\d{5}$/.test(zip)){
+    statusEl.textContent = "Enter a 5-digit ZIP code.";
+    return;
+  }
+  statusEl.textContent = "Looking up…";
+  const coords = await geocodeZip(zip);
+  if(!coords){
+    statusEl.textContent = "Couldn't find that ZIP code — check it, or make sure you're connected to the internet.";
+    return;
+  }
+  state.userLoc = {lat:coords[0], lng:coords[1]};
+  state.sortNearest = true;
+  state.dayFilterKey = "All"; state.dayFilter = "All";
+  renderTabs();
+  statusEl.textContent = `Sorted by distance from ${zip}.`;
+  document.getElementById('clearLoc').style.display='inline';
+  render();
+}
+document.getElementById('clearLoc').addEventListener('click',()=>{
+  state.userLoc=null; state.sortNearest=false;
+  document.getElementById('nearStatus').textContent="";
+  document.getElementById('clearLoc').style.display='none';
+  render();
+});
+
+/* ---------------- MY LIST ---------------- */
+function saveMyList(){ localStorage.setItem('alanon_mylist_v1', JSON.stringify([...myList])); }
+function toggleOverlay(id, open){ document.getElementById(id).classList.toggle('open', open); }
+
+document.getElementById('fabBtn').addEventListener('click',()=>{ renderMyList(); toggleOverlay('myListOverlay',true); });
+document.getElementById('closeMyList').addEventListener('click',()=>toggleOverlay('myListOverlay',false));
+[document.getElementById('myListOverlay'), document.getElementById('legendOverlay')].forEach(ov=>{
+  ov.addEventListener('click',(e)=>{ if(e.target===ov) ov.classList.remove('open'); });
+});
+
+function meetingLine(m){
+  const dayLabel = m.day==="Monthly" ? m.monthlyLabel : DAY_FULL[m.day];
+  const typeNames = m.types.map(t => LEGEND[t] || t).join(', ');
+  return `${m.group}\n${dayLabel}, ${m.time}\n${m.address}${m.detail ? " — "+m.detail : ""}, ${m.city} ${m.zip}\n${typeNames}`;
+}
+function buildShareText(){
+  const items=[...myList].map(id=>MEETINGS[id]).filter(Boolean);
+  if(!items.length) return "";
+  return items.map(meetingLine).join("\n\n");
+}
+document.getElementById('shareText').addEventListener('click',()=>{
+  const txt = buildShareText();
+  if(!txt) return;
+  window.location.href = `sms:?&body=${encodeURIComponent(txt)}`;
+});
+document.getElementById('shareEmail').addEventListener('click',()=>{
+  const txt = buildShareText();
+  if(!txt) return;
+  window.location.href = `mailto:?subject=${encodeURIComponent("Al-Anon Meetings — San Antonio Area")}&body=${encodeURIComponent(txt)}`;
+});
+document.getElementById('shareCopy').addEventListener('click', async ()=>{
+  const txt = buildShareText();
+  if(!txt) return;
+  try{
+    await navigator.clipboard.writeText(txt);
+    const btn=document.getElementById('shareCopy');
+    const original=btn.innerHTML;
+    btn.innerHTML='Copied ✓';
+    setTimeout(()=>btn.innerHTML=original,1500);
+  }catch(e){ alert("Couldn't copy automatically — select and copy the text manually."); }
+});
+
+function renderMyList(){
+  const el = document.getElementById('myListContent');
+  const items=[...myList].map(id=>MEETINGS[id]).filter(Boolean);
+  document.getElementById('fabCount').textContent = items.length;
+  if(!items.length){
+    el.innerHTML = `<p class="mylist-empty">No meetings saved yet. Tap the star on any meeting card to add it here, then share the list by text or email.</p>`;
+    return;
+  }
+  el.innerHTML = items.map(m=>{
+    const dayLabel = m.day==="Monthly" ? m.monthlyLabel : DAY_FULL[m.day];
+    return `<div class="mylist-item">
+      <div class="info"><b>${m.group}</b><span>${dayLabel} · ${m.time} — ${m.city}</span></div>
+      <button class="remove-btn" data-id="${m.id}" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('.remove-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      myList.delete(Number(b.dataset.id));
+      saveMyList(); renderMyList(); render();
+    });
+  });
+}
+
+/* ---------------- RENDER LIST ---------------- */
+const listEl = document.getElementById('list');
+const countLineEl = document.getElementById('countLine');
+
+function mapsUrl(m){
+  const q = encodeURIComponent(`${m.address}, ${m.city}, TX ${m.zip}`);
+  return `https://maps.google.com/?q=${q}`;
+}
+
+function render(){
+  let items = MEETINGS.filter(m=>{
+    if(state.dayFilterKey!=="All" && state.dayFilterKey!=="Today"){
+      if(m.day !== state.dayFilter) return false;
+    } else if(state.dayFilterKey==="Today"){
+      if(m.day !== state.dayFilter) return false;
+    }
+    if(state.cities.size && !state.cities.has(m.city)) return false;
+    if(state.types.size){
+      const ok=[...state.types].every(t=>m.types.includes(t));
+      if(!ok) return false;
+    }
+    if(state.search){
+      const hay = `${m.group} ${m.address} ${m.detail} ${m.city} ${m.zip}`.toLowerCase();
+      if(!hay.includes(state.search)) return false;
+    }
+    return true;
+  });
+
+  if(state.userLoc){
+    items = items.map(m=>({...m, dist: haversine(state.userLoc.lat,state.userLoc.lng,m.lat,m.lng)}));
+    if(state.sortNearest) items.sort((a,b)=>a.dist-b.dist);
+  } else {
+    items.sort((a,b)=> (DAY_ORDER.indexOf(a.day)-DAY_ORDER.indexOf(b.day)) || a.time.localeCompare(b.time));
+  }
+
+  countLineEl.textContent = `${items.length} meeting${items.length===1?'':'s'} found`;
+
+  if(!items.length){
+    listEl.innerHTML = `<div class="empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <p>No meetings match. Try clearing a filter or checking "All" days.</p>
+    </div>`;
+    return;
+  }
+
+  listEl.innerHTML = items.map((m,idx)=>{
+    const dayLabel = m.day==="Monthly" ? m.monthlyLabel : DAY_FULL[m.day];
+    const isMonthly = m.day==="Monthly";
+    const isElectronic = m.special==='electronic';
+    const saved = myList.has(m.id);
+    const distChip = (m.dist!==undefined && !isElectronic) ? `<span class="dist-chip">${m.dist<1 ? '<1' : m.dist.toFixed(1)} mi away</span>` : '';
+    const badges = m.types.map(t=>`<span class="badge${t==='AT'?' alateen':''}" title="${LEGEND[t]||''}">${t}</span>`).join('');
+    const alateenBadge = m.special==='alateen' ? `<span class="badge alateen">Alateen</span>` : '';
+    const zoomBadge = isElectronic ? `<span class="badge alateen">Zoom only</span>` : '';
+    const locationLine = isElectronic
+      ? `<p class="addr-detail">${m.city} group — meets on Zoom only</p>`
+      : `<p class="addr-detail">${m.city}, TX ${m.zip}</p>`;
+    const directionsLink = isElectronic ? '' : `
+        <a class="map-link" href="${mapsUrl(m)}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Directions
+        </a>`;
+    return `<article class="card" style="animation-delay:${Math.min(idx*30,300)}ms">
+      <div class="card-top">
+        <div>
+          <span class="tag-day${isMonthly?' monthly':''}">${dayLabel.toUpperCase()}</span>
+          <h3 class="group-name">${m.group}</h3>
+        </div>
+        <button class="star-btn${saved?' saved':''}" data-id="${m.id}" aria-label="${saved?'Remove from':'Add to'} my list">
+          <svg viewBox="0 0 24 24" fill="${saved?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </button>
+      </div>
+      <div class="time-row">${m.time}${distChip ? '  ·  ' : ''}${distChip}</div>
+      <hr class="divider">
+      <p class="addr">${m.address}</p>
+      ${m.detail ? `<p class="addr-detail">${m.detail}</p>` : ''}
+      ${locationLine}
+      <div class="card-footer">
+        <div class="badges">${badges}${alateenBadge}${zoomBadge}</div>
+        ${directionsLink}
+      </div>
+    </article>`;
+  }).join('');
+
+  listEl.querySelectorAll('.star-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const id = Number(b.dataset.id);
+      myList.has(id) ? myList.delete(id) : myList.add(id);
+      saveMyList(); render(); renderMyList();
+    });
+  });
+
+  document.getElementById('fabCount').textContent = myList.size;
+}
+
+render();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
