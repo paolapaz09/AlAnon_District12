@@ -29,9 +29,12 @@
     --shadow: 0 1px 2px rgba(29,58,72,0.06), 0 4px 14px rgba(29,58,72,0.07);
     --radius: 14px;
   }
+  html{overflow-x:hidden; width:100%;}
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
+    overflow-x:hidden;
+    max-width:100vw;
     background:var(--paper);
     color:var(--ink);
     font-family:'Inter',system-ui,sans-serif;
@@ -91,6 +94,7 @@
   }
   .search-wrap{
     flex:1;
+    min-width:0;
     position:relative;
   }
   .search-wrap input{
@@ -155,6 +159,23 @@
     margin-top:10px;
     flex-wrap:wrap;
   }
+  .zip-wrap{
+    display:flex;
+    gap:8px;
+    flex:1;
+    min-width:0;
+  }
+  .zip-wrap input{
+    flex:1;
+    min-width:0;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1.5px solid var(--line);
+    background:var(--card);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:15px;
+    color:var(--ink);
+  }
   .near-btn{
     display:flex;align-items:center;gap:7px;
     background:var(--amber);
@@ -165,6 +186,8 @@
     font-weight:600;
     font-size:13.5px;
     cursor:pointer;
+    white-space:nowrap;
+    flex-shrink:0;
   }
   .near-btn svg{width:15px;height:15px;}
   .near-status{
@@ -500,10 +523,15 @@
   <div class="tabs" id="dayTabs"></div>
 
   <div class="near-row">
-    <button class="near-btn" id="nearBtn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 L15 9 L22 12 L15 15 L12 22 L9 15 L2 12 L9 9 Z"/></svg>
-      Find nearest meetings
-    </button>
+    <div class="zip-wrap">
+      <input id="zipInput" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="5" placeholder="Your ZIP code" aria-label="Your ZIP code">
+      <button class="near-btn" id="zipGoBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 L15 9 L22 12 L15 15 L12 22 L9 15 L2 12 L9 9 Z"/></svg>
+        Find nearest
+      </button>
+    </div>
+  </div>
+  <div class="near-row" style="margin-top:6px;">
     <span class="near-status" id="nearStatus"></span>
     <button class="clear-loc" id="clearLoc" style="display:none;">clear</button>
   </div>
@@ -755,22 +783,48 @@ function haversine(lat1,lon1,lat2,lon2){
   const a=Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
   return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
 }
-document.getElementById('nearBtn').addEventListener('click',()=>{
-  const statusEl = document.getElementById('nearStatus');
-  if(!navigator.geolocation){ statusEl.textContent="Location isn't available in this browser."; return; }
-  statusEl.textContent="Locating…";
-  navigator.geolocation.getCurrentPosition(pos=>{
-    state.userLoc = {lat:pos.coords.latitude, lng:pos.coords.longitude};
-    state.sortNearest = true;
-    state.dayFilterKey = "All"; state.dayFilter = "All";
-    renderTabs();
-    statusEl.textContent="Sorted by distance from you.";
-    document.getElementById('clearLoc').style.display='inline';
-    render();
-  }, err=>{
-    statusEl.textContent="Couldn't get your location — check permissions and try again.";
-  }, {enableHighAccuracy:true, timeout:10000});
+document.getElementById('zipGoBtn').addEventListener('click', handleZipSearch);
+document.getElementById('zipInput').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter') handleZipSearch();
 });
+
+async function geocodeZip(zip){
+  // Known meeting ZIPs resolve instantly and work offline.
+  if(ZIP[zip]) return ZIP[zip];
+  // Otherwise look it up online (requires an internet connection).
+  try{
+    const res = await fetch(`https://api.zippopotam.us/us/${zip}`);
+    if(!res.ok) throw new Error('not found');
+    const data = await res.json();
+    const place = data.places && data.places[0];
+    if(!place) throw new Error('no place');
+    return [parseFloat(place.latitude), parseFloat(place.longitude)];
+  }catch(e){
+    return null;
+  }
+}
+
+async function handleZipSearch(){
+  const statusEl = document.getElementById('nearStatus');
+  const zip = document.getElementById('zipInput').value.trim();
+  if(!/^\d{5}$/.test(zip)){
+    statusEl.textContent = "Enter a 5-digit ZIP code.";
+    return;
+  }
+  statusEl.textContent = "Looking up…";
+  const coords = await geocodeZip(zip);
+  if(!coords){
+    statusEl.textContent = "Couldn't find that ZIP code — check it, or make sure you're connected to the internet.";
+    return;
+  }
+  state.userLoc = {lat:coords[0], lng:coords[1]};
+  state.sortNearest = true;
+  state.dayFilterKey = "All"; state.dayFilter = "All";
+  renderTabs();
+  statusEl.textContent = `Sorted by distance from ${zip}.`;
+  document.getElementById('clearLoc').style.display='inline';
+  render();
+}
 document.getElementById('clearLoc').addEventListener('click',()=>{
   state.userLoc=null; state.sortNearest=false;
   document.getElementById('nearStatus').textContent="";
